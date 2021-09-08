@@ -1,20 +1,20 @@
 package turismoEnLaTierraMedia;
 
-public abstract class Producto implements Comparable<Producto>{
+public abstract class Producto implements Comparable<Producto> {
 	protected int costoEnMonedas;
-	protected double tiempoEnHoras;
+	protected int tiempoEnHoras;
 	private String nombre;
-	private enum tipo { Aventura, Paisaje, Degustación };		//No se usar enums... Hay que agregarlo al constructor
+	private TipoDeProducto tipo;
 
-	
-	public Producto(String nombre) {		//AGREGAR ENUM
+	public Producto(String nombre, TipoDeProducto tipo) { // AGREGAR ENUM
 		this.nombre = nombre;
+		this.tipo = tipo;
 	}
-	
+
 	public Integer getCosto() {
 		return this.costoEnMonedas;
 	}
-	
+
 	public int compareTo(Producto otro) {
 		return (this.getCosto().compareTo(otro.getCosto()));
 	}
@@ -22,5 +22,9 @@ public abstract class Producto implements Comparable<Producto>{
 	public abstract boolean consultarDisponibilidad(String user);
 
 	public abstract void comprar(String user);
+
+	public String getNombre() {
+		return this.nombre;
+	}
 
 }

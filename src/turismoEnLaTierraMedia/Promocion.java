@@ -1,14 +1,14 @@
 package turismoEnLaTierraMedia;
 
 public abstract class Promocion extends Producto {
-	
-	private Atraccion[] atraccionesIncluidas;
 
-	public Promocion(String nombre, Atraccion[] atracciones) {
-		super(nombre);
+	protected Atraccion[] atraccionesIncluidas;
+
+	public Promocion(String nombre, TipoDeProducto tipo, Atraccion[] atracciones) {
+		super(nombre, tipo);
 		this.atraccionesIncluidas = atracciones;
 	}
-	
+
 	@Override
 	public boolean consultarDisponibilidad(String user) {
 		return false;

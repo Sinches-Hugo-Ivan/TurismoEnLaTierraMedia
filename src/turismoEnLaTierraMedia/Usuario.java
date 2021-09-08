@@ -4,21 +4,25 @@ public class Usuario {
 	private int presupuesto;
 	private double tiempoEnHoras;
 	private String nombre;
-	private String atracciónPreferida;
-	
-	public Usuario(String nombre, String atracciónPreferida, int presupuesto, double tiempoEnHoras) {
+	private TipoDeProducto atraccionPreferida;
+
+	public Usuario(String nombre, TipoDeProducto atraccionPreferida, int presupuesto, double tiempoEnHoras) {
 		this.nombre = nombre;
-		this.atracciónPreferida = atracciónPreferida;
+		this.atraccionPreferida = atraccionPreferida;
 		this.presupuesto = presupuesto;
 		this.tiempoEnHoras = tiempoEnHoras;
 	}
-	
-	public void visitar () {
-		// Hay que charlar bien como funcionaría
+
+	public void visitar() {
+		// Hay que charlar bien como funcionar­a
 	}
-	
+
 	public boolean tienePresupuestoYTiempoSuficiente(int costoDelProducto, double duracionProducto) {
 		return (this.presupuesto > costoDelProducto && this.tiempoEnHoras > duracionProducto);
+	}
+
+	public String getNombre() {
+		return this.nombre;
 	}
 
 }
