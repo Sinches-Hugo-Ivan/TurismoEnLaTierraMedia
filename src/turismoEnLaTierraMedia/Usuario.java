@@ -25,4 +25,16 @@ public class Usuario {
 		return this.nombre;
 	}
 
+	public int getPresupuesto() {
+		return presupuesto;
+	}
+
+	public double getTiempoEnHoras() {
+		return tiempoEnHoras;
+	}
+
+	public TipoDeProducto getAtraccionPreferida() {
+		return atraccionPreferida;
+	}
+
 }

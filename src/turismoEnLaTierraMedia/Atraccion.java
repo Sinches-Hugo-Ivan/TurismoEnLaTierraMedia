@@ -10,8 +10,8 @@ public class Atraccion extends Producto {
 
 	public Atraccion(String nombre, int costoEnMonedas, int tiempoEnHoras, int paramCupo, TipoDeProducto tipo) {
 		super(nombre, tipo);
-		this.costoEnMonedas = costoEnMonedas;
-		this.tiempoEnHoras = tiempoEnHoras;
+		super.costoEnMonedas = costoEnMonedas;
+		super.tiempoEnHoras = tiempoEnHoras;
 		usuarios = new String[paramCupo];
 	}
 

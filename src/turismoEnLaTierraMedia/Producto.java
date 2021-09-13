@@ -11,6 +11,14 @@ public abstract class Producto implements Comparable<Producto> {
 		this.tipo = tipo;
 	}
 
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public int getTiempo() {
+		return this.tiempoEnHoras;
+	}
+
 	public Integer getCosto() {
 		return this.costoEnMonedas;
 	}
@@ -22,9 +30,5 @@ public abstract class Producto implements Comparable<Producto> {
 	public abstract boolean consultarDisponibilidad(String user);
 
 	public abstract void comprar(String user);
-
-	public String getNombre() {
-		return this.nombre;
-	}
 
 }

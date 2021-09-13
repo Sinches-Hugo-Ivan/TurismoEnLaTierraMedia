@@ -2,9 +2,9 @@ package turismoEnLaTierraMedia;
 
 public class PromoAbsoluta extends Promocion {
 
-	public PromoAbsoluta(String nombre, TipoDeProducto tipo, Atraccion[] atracciones) {
+	public PromoAbsoluta(String nombre, TipoDeProducto tipo, Producto[] atracciones, int pcosto) {
 		super(nombre, tipo, atracciones);
-		// TODO Auto-generated constructor stub
+		super.costoEnMonedas = pcosto;
 	}
 
 }
