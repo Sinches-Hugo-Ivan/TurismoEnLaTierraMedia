@@ -1,10 +1,12 @@
 package turismoEnLaTierraMedia;
 
+import java.util.List;
+
 public abstract class Promocion extends Producto {
 
-	protected Producto[] atraccionesIncluidas;
+	protected List<Producto> atraccionesIncluidas;
 
-	public Promocion(String nombre, TipoDeProducto tipo, Producto[] atracciones) {
+	public Promocion(String nombre, TipoDeProducto tipo, List<Producto> atracciones) {
 		super(nombre, tipo);
 		this.atraccionesIncluidas = atracciones;
 		for(Producto cadaAtraccion : atraccionesIncluidas) {
@@ -13,11 +15,19 @@ public abstract class Promocion extends Producto {
 	}
 
 	@Override
-	public boolean consultarDisponibilidad(String user) {
-		return false;
+	public boolean hayLugar() {
+		boolean resultado = true;
+		for (Producto cadaAtraccion : atraccionesIncluidas)
+			if (!cadaAtraccion.hayLugar()) {
+				resultado = false;
+			}
+		return resultado;
 	}
-
+	
 	@Override
-	public void comprar(String user) {
+	public void comprado() {
+		for (Producto cadaAtraccion : atraccionesIncluidas) {
+			cadaAtraccion.comprado();
+		}
 	}
 }

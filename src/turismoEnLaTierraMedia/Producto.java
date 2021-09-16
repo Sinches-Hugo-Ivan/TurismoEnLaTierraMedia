@@ -22,13 +22,17 @@ public abstract class Producto implements Comparable<Producto> {
 	public Integer getCosto() {
 		return this.costoEnMonedas;
 	}
+	
+	public TipoDeProducto getTipo() {
+		return this.tipo;
+	}
 
 	public int compareTo(Producto otro) {
 		return (this.getCosto().compareTo(otro.getCosto()));
 	}
 
-	public abstract boolean consultarDisponibilidad(String user);
-
-	public abstract void comprar(String user);
+	public abstract boolean hayLugar();
+	
+	public abstract void comprado();
 
 }

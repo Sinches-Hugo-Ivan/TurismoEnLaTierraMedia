@@ -1,10 +1,15 @@
 package turismoEnLaTierraMedia;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Usuario {
 	private int presupuesto;
 	private double tiempoEnHoras;
 	private String nombre;
 	private TipoDeProducto atraccionPreferida;
+	private Itinerario itinerario;
+	private List<Producto> atraccionesAdquiridas = new LinkedList<Producto>();
 
 	public Usuario(String nombre, TipoDeProducto atraccionPreferida, int presupuesto, double tiempoEnHoras) {
 		this.nombre = nombre;
@@ -12,13 +17,15 @@ public class Usuario {
 		this.presupuesto = presupuesto;
 		this.tiempoEnHoras = tiempoEnHoras;
 	}
-
-	public void visitar() {
-		// Hay que charlar bien como funcionar­a
+	
+	@Override
+	public String toString() {
+		return "Nombre usuario: " + nombre +", Preferencia: " + atraccionPreferida + ", Presupuesto: " + presupuesto
+				+ "y Tiempo en Horas: " + tiempoEnHoras ;
 	}
-
-	public boolean tienePresupuestoYTiempoSuficiente(int costoDelProducto, double duracionProducto) {
-		return (this.presupuesto > costoDelProducto && this.tiempoEnHoras > duracionProducto);
+	
+	public void agregarItinerario(Itinerario itinerario) {
+		this.itinerario = itinerario;
 	}
 
 	public String getNombre() {
@@ -26,15 +33,33 @@ public class Usuario {
 	}
 
 	public int getPresupuesto() {
-		return presupuesto;
+		return this.presupuesto;
 	}
 
 	public double getTiempoEnHoras() {
-		return tiempoEnHoras;
+		return this.tiempoEnHoras;
 	}
 
 	public TipoDeProducto getAtraccionPreferida() {
 		return atraccionPreferida;
+	}
+	
+	public Itinerario getItinerario() {
+		return this.itinerario;
+	}
+	
+	public void atraccionAdquirida(Atraccion atraccionNueva) {
+		this.atraccionesAdquiridas.add(atraccionNueva);
+	}
+	
+	public boolean tengoAtraccion(Producto atraccionConsulta) {
+		boolean resultado = false;
+		for (Producto cadaAtraccion : atraccionesAdquiridas) {
+			if (cadaAtraccion == atraccionConsulta) {
+				resultado = true;
+			}
+		}
+		return resultado;
 	}
 
 }

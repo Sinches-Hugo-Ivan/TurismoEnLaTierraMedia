@@ -1,14 +1,13 @@
 package turismoEnLaTierraMedia;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class PromoAxB extends Promocion {
 
-	public PromoAxB(String nombre, TipoDeProducto tipo, Producto[] atracciones) {
+	public PromoAxB(String nombre, TipoDeProducto tipo, List<Producto> atracciones) {
 		super(nombre, tipo, atracciones);
-		Arrays.sort(atracciones);
-		for (int i = 1; i < atracciones.length; i++) {
-			super.costoEnMonedas += atracciones[i].getCosto();
+		for (int i = 1; i < atracciones.size(); i++) {
+			super.costoEnMonedas += atracciones.get(i).getCosto();
 		}
 	}
 
