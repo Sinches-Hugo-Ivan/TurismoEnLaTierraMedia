@@ -36,7 +36,7 @@ public class SistemaTest {
 	public void agregarNuevaAtraccionalsistema() {
 		Sistema sistema = new Sistema(50, 20, 10);
         sistema.nuevaAtraccion("Moria", 10, 2,6,TipoDeProducto.AVENTURA);
-        assertEquals("Moria", sistema.getAtraccionesYPromociones()[0].getNombre());
+        assertEquals("Moria", sistema.getAtraccionesYPromociones().get(0).getNombre());
 	}
 
 /*
