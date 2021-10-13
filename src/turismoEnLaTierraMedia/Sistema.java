@@ -1,77 +1,62 @@
-package turismoEnLaTierraMedia;
+	package turismoEnLaTierraMedia;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 public class Sistema {
-	private int atracciones;
-	private int promociones;
-	private Usuario[] usuarios;
-	private int usuariosIngresados = 0;
-	private List<Producto> productos = new LinkedList<Producto>();
-
-	public Sistema(int usuarios_, int atracciones_, int promociones_) {
-		this.usuarios = new Usuario[usuarios_];
-		this.atracciones = atracciones_;
-		this.promociones = promociones_;
-	}
+	private List<Usuario> usuarios = new LinkedList<Usuario>();
+	private Map<TipoDeProducto, ArrayList<Producto>> productos = new TreeMap<TipoDeProducto, ArrayList<Producto>>();
 
 	public void nuevoUsuario(String nombreUsuario, TipoDeProducto aventura, int monedas, int horas) {
-		usuarios[usuariosIngresados] = new Usuario(nombreUsuario, aventura, monedas, horas);
-		usuariosIngresados++;
+		usuarios.add(new Usuario(nombreUsuario, aventura, monedas, horas));
 	}
 
-	public void nuevaAtraccion(String nombreAtraccion, int costo, int tiempo, int cupo, TipoDeProducto aventura) {
-		productos.add(new Atraccion(nombreAtraccion, costo, tiempo, cupo, aventura));
-	}
-
-	public void nuevaPromoAbs(String nombre, TipoDeProducto tipo, List<Producto> atracciones, int costo) {
-		productos.add(new PromoAbsoluta(nombre, tipo, atracciones, costo));
-	}
-
-	public void nuevaPromoAxB(String nombre, TipoDeProducto tipo, List<Producto> atracciones) {
-		productos.add(new PromoAxB(nombre, tipo, atracciones));
-	}
-
-	public void nuevaPromoPorc(String nombre, TipoDeProducto tipo, List<Producto> atracciones, int porcentaje) {
-		productos.add(new PromoPorcentual(nombre, tipo, atracciones, porcentaje));
+	public void agregarProducto(Producto producto) {
+		ArrayList<Producto> aux;
+		TipoDeProducto key = producto.getTipo();
+		if (this.productos.containsKey(key)) {
+			aux = this.productos.get(key);
+		} else {
+			aux = new ArrayList<Producto>();
+		}
+		aux.add(producto);
 	}
 	
 	public void ofrecerProductos() {
 		for (Usuario cadaUsuario : usuarios) {
-			for (Producto cadaProducto : productos) {
-				int presupuestoUsuario = cadaUsuario.getPresupuesto();
-				double tiempoUsuario = cadaUsuario.getTiempoEnHoras();
-				productos.sort(new OrdenarProductosPorPrefYCosto(cadaUsuario.getAtraccionPreferida()));
-				if (presupuestoUsuario >= cadaProducto.getCosto() && tiempoUsuario >= cadaProducto.getTiempo() && !cadaUsuario.tengoAtraccion(cadaProducto) && cadaProducto.hayLugar()) {
-					cadaProducto.comprado();
-					presupuestoUsuario -= cadaProducto.getCosto();
-					tiempoUsuario -= cadaProducto.getTiempo();
+			
+			int presupuestoUsuario = cadaUsuario.getPresupuesto();
+			double tiempoUsuario = cadaUsuario.getTiempoEnHoras();
+			Itinerario itin = new Itinerario();
+			
+			for (Entry<TipoDeProducto, ArrayList<Producto>> cadaTipo : productos.entrySet()) {
+				List<Producto> aux = cadaTipo.getValue();
+				aux.sort(null);
+				for (Producto cadaProducto : aux) {
+					if (presupuestoUsuario >= cadaProducto.getCosto() && tiempoUsuario >= cadaProducto.getTiempo() && !itin.containsAtraccion(cadaProducto) && cadaProducto.hayLugar()) {
+						presupuestoUsuario -= cadaProducto.getCosto();
+						tiempoUsuario -= cadaProducto.getTiempo();
+						cadaProducto.comprado();
+						if (cadaProducto instanceof Promocion) {
+							List<Atraccion> auxAtr = ((Promocion) cadaProducto).getAtracciones();
+							for (Atraccion cadaAtraccion : auxAtr) {
+								itin.add(cadaAtraccion);
+							}
+							
+						} else if (cadaProducto instanceof Atraccion) {
+							itin.add((Atraccion)cadaProducto);
+						}
+					}
 				}
-				
 			}
+			itin.setCosto(cadaUsuario.getPresupuesto() - presupuestoUsuario);
+			itin.setTiempo(cadaUsuario.getTiempoEnHoras() - tiempoUsuario);
+			cadaUsuario.setItinerario(itin);
 		}
 	}
-
-	public int getCapacidadusuarios() {
-		return usuarios.length;
-	}
-
-	public int getCapacidadAtracciones() {
-		return this.atracciones;
-	}
-
-	public int getCapacidadPromociones() {
-		return this.promociones;
-	}
-
-	public Usuario[] getUsuarios() {
-		return this.usuarios;
-	}
-
-	public List<Producto> getAtraccionesYPromociones() {
-		return this.productos;
-	}
-
 }

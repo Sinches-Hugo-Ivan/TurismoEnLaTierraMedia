@@ -26,7 +26,7 @@ public abstract class Producto implements Comparable<Producto> {
 	public TipoDeProducto getTipo() {
 		return this.tipo;
 	}
-
+	
 	public int compareTo(Producto otro) {
 		return (this.getCosto().compareTo(otro.getCosto()));
 	}

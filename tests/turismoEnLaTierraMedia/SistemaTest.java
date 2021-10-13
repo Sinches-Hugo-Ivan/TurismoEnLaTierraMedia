@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class SistemaTest {
 
-	@Before
+	/*@Before
 	public void preparacion() {
 		Sistema sistema = new Sistema(50, 20, 10);
 		sistema.nuevoUsuario("Eowyn", TipoDeProducto.AVENTURA, 10, 8);
@@ -24,20 +24,22 @@ public class SistemaTest {
 		assertEquals(20, sistema.getCapacidadAtracciones());
 		assertEquals(10, sistema.getCapacidadPromociones());
 	}
-
-	@Test
-	public void agregarNuevoUsuarioAlsistema() {
-		Sistema sistema = new Sistema(50, 20, 10);
-		sistema.nuevoUsuario("Eowyn", TipoDeProducto.AVENTURA, 10, 8);
-		assertEquals("Eowyn", sistema.getUsuarios()[0].getNombre());
-	}
-
-	@Test
-	public void agregarNuevaAtraccionalsistema() {
-		Sistema sistema = new Sistema(50, 20, 10);
-        sistema.nuevaAtraccion("Moria", 10, 2,6,TipoDeProducto.AVENTURA);
-        assertEquals("Moria", sistema.getAtraccionesYPromociones().get(0).getNombre());
-	}
+	
+	*
+	 *@Test
+	 *public void agregarNuevoUsuarioAlsistema() {
+	 *	Sistema sistema = new Sistema(50, 20, 10);
+	 *	sistema.nuevoUsuario("Eowyn", TipoDeProducto.AVENTURA, 10, 8);
+	 *	assertEquals("Eowyn", sistema.getUsuarios()[0].getNombre());
+	 *}
+	 *
+	
+	*@Test
+	 *public void agregarNuevaAtraccionalsistema() {
+	 *	Sistema sistema = new Sistema(50, 20, 10);
+     *    sistema.nuevaAtraccion("Moria", 10, 2,6,TipoDeProducto.AVENTURA);
+	 *}
+	 */
 
 /*
  * @Test

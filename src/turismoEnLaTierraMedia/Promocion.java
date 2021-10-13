@@ -4,12 +4,12 @@ import java.util.List;
 
 public abstract class Promocion extends Producto {
 
-	protected List<Producto> atraccionesIncluidas;
+	protected List<Atraccion> atraccionesIncluidas;
 
-	public Promocion(String nombre, TipoDeProducto tipo, List<Producto> atracciones) {
+	public Promocion(String nombre, TipoDeProducto tipo, List<Atraccion> atracciones) {
 		super(nombre, tipo);
 		this.atraccionesIncluidas = atracciones;
-		for(Producto cadaAtraccion : atraccionesIncluidas) {
+		for(Atraccion cadaAtraccion : atraccionesIncluidas) {
 			super.tiempoEnHoras += cadaAtraccion.getTiempo();
 		}
 	}
@@ -17,7 +17,7 @@ public abstract class Promocion extends Producto {
 	@Override
 	public boolean hayLugar() {
 		boolean resultado = true;
-		for (Producto cadaAtraccion : atraccionesIncluidas)
+		for (Atraccion cadaAtraccion : atraccionesIncluidas)
 			if (!cadaAtraccion.hayLugar()) {
 				resultado = false;
 			}
@@ -26,8 +26,12 @@ public abstract class Promocion extends Producto {
 	
 	@Override
 	public void comprado() {
-		for (Producto cadaAtraccion : atraccionesIncluidas) {
+		for (Atraccion cadaAtraccion : atraccionesIncluidas) {
 			cadaAtraccion.comprado();
 		}
+	}
+	
+	public List<Atraccion> getAtracciones() {
+		return atraccionesIncluidas;
 	}
 }

@@ -5,22 +5,41 @@ import java.util.List;
 public class Itinerario {
 	private double costoTotal;
 	private double tiempoTotal;
-	private List<Producto> productosAdquiridos;
+	private List<Atraccion> atraccionesAdquiridas;
 
-	public Itinerario(List<Producto> paseo) {
-		this.productosAdquiridos = paseo;
-		for (Producto cadaProducto : paseo) {
-			this.costoTotal += cadaProducto.getCosto();
+	public void add(Atraccion atraccion) {
+		this.atraccionesAdquiridas.add(atraccion);
+	}
+	
+	public void setCosto (double pCosto) {
+		this.costoTotal = pCosto;
+	}
+	
+	public void setTiempo (double pTiempo) {
+		this.tiempoTotal = pTiempo;
+	}
+	
+	public boolean containsAtraccion(Producto productoConsulta) {
+		boolean resultado = false;
+		if (productoConsulta instanceof Promocion) {
+			List<Atraccion> aux = ((Promocion)productoConsulta).getAtracciones();
+			for (Atraccion cadaAtraccion : aux) {
+				if (this.containsAtraccion(cadaAtraccion)) {
+					resultado = true;
+				}
+			}
 		}
-		for (Producto cadaProducto : paseo) {
-			this.tiempoTotal += cadaProducto.getTiempo();
+		for (Producto cadaAtraccion : atraccionesAdquiridas) {
+			if (cadaAtraccion == productoConsulta) {
+				resultado = true;
+			}
 		}
+		return resultado;
 	}
 
 	@Override
 	public String toString() {
-		return "Itinerario: " + this.productosAdquiridos + "\nDuración Total: " + this.tiempoTotal + "\nCosto Total: "
+		return "Itinerario: " + this.atraccionesAdquiridas + "\nDuración Total: " + this.tiempoTotal + "\nCosto Total: "
 				+ this.costoTotal + "\n";
 	}
-
 }

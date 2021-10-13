@@ -1,4 +1,4 @@
-package turismoEnLaTierraMedia;
+	package turismoEnLaTierraMedia;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +9,6 @@ public class Usuario {
 	private String nombre;
 	private TipoDeProducto atraccionPreferida;
 	private Itinerario itinerario;
-	private List<Producto> atraccionesAdquiridas = new LinkedList<Producto>();
 
 	public Usuario(String nombre, TipoDeProducto atraccionPreferida, int presupuesto, double tiempoEnHoras) {
 		this.nombre = nombre;
@@ -22,10 +21,6 @@ public class Usuario {
 	public String toString() {
 		return "Nombre usuario: " + nombre +", Preferencia: " + atraccionPreferida + ", Presupuesto: " + presupuesto
 				+ "y Tiempo en Horas: " + tiempoEnHoras ;
-	}
-	
-	public void agregarItinerario(Itinerario itinerario) {
-		this.itinerario = itinerario;
 	}
 
 	public String getNombre() {
@@ -44,22 +39,8 @@ public class Usuario {
 		return atraccionPreferida;
 	}
 	
-	public Itinerario getItinerario() {
-		return this.itinerario;
-	}
-	
-	public void atraccionAdquirida(Atraccion atraccionNueva) {
-		this.atraccionesAdquiridas.add(atraccionNueva);
-	}
-	
-	public boolean tengoAtraccion(Producto atraccionConsulta) {
-		boolean resultado = false;
-		for (Producto cadaAtraccion : atraccionesAdquiridas) {
-			if (cadaAtraccion == atraccionConsulta) {
-				resultado = true;
-			}
-		}
-		return resultado;
+	public void setItinerario(Itinerario itin) {
+		this.itinerario = itin;
 	}
 
 }
